@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.ecocode</groupId>
+    <artifactId>ecocode-parent</artifactId>
+    <version>1.4.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>ecoCode Sonar Plugins Project</name>
+    <description>Provides rules to reduce the environmental footprint of your programs</description>
+    <url>https://github.com/green-code-initiative/ecocode</url>
+    <organization>
+        <name>green-code-initiative</name>
+        <url>https://github.com/green-code-initiative</url>
+    </organization>
+    <licenses>
+        <license>
+            <name>GPL v3</name>
+            <url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <!--
+            Mandatory information to be able to publish to Maven Central:
+            https://central.sonatype.org/publish/requirements/#developer-information
+        -->
+        <developer>
+            <name>Gilles Grousset</name>
+            <email>zippy1978@users.noreply.github.com</email>
+            <organization>green-code-initiative</organization>
+            <organizationUrl>https://github.com/green-code-initiative</organizationUrl>
+        </developer>
+        <developer>
+            <name>Maxime Malgorn</name>
+            <email>utarwyn@users.noreply.github.com</email>
+            <organization>green-code-initiative</organization>
+            <organizationUrl>https://github.com/green-code-initiative</organizationUrl>
+        </developer>
+        <developer>
+            <name>Geoffrey Lalloué</name>
+            <email>glalloue@users.noreply.github.com</email>
+            <organization>green-code-initiative</organization>
+            <organizationUrl>https://github.com/green-code-initiative</organizationUrl>
+        </developer>
+        <developer>
+            <name>David DE CARVALHO</name>
+            <email>dedece35@users.noreply.github.com</email>
+            <organization>green-code-initiative</organization>
+            <organizationUrl>https://github.com/green-code-initiative</organizationUrl>
+        </developer>
+        <developer>
+            <name>Olivier Le Goaër</name>
+            <email>olegoaer@users.noreply.github.com</email>
+            <organization>green-code-initiative</organization>
+            <organizationUrl>https://github.com/green-code-initiative</organizationUrl>
+        </developer>
+        <developer>
+            <name>Julien Hertout</name>
+            <email>jhertout@users.noreply.github.com</email>
+            <organization>green-code-initiative</organization>
+            <organizationUrl>https://github.com/green-code-initiative</organizationUrl>
+        </developer>
+        <developer>
+            <name>Jules Delecour</name>
+            <email>jules-delecour-dav@users.noreply.github.com</email>
+            <organization>green-code-initiative</organization>
+            <organizationUrl>https://github.com/green-code-initiative</organizationUrl>
+        </developer>
+        <developer>
+            <name>DUBOIS Maxime</name>
+            <email>mdubois81@users.noreply.github.com</email>
+            <organization>green-code-initiative</organization>
+            <organizationUrl>https://github.com/green-code-initiative</organizationUrl>
+        </developer>
+    </developers>
+
+    <modules>
+        <module>ecocode-rules-specifications</module>
+        <module>java-plugin</module>
+    </modules>
+
+    <scm>
+        <connection>scm:git:https://github.com/green-code-initiative/ecocode</connection>
+        <developerConnection>scm:git:https://github.com/green-code-initiative/ecocode</developerConnection>
+        <url>https://github.com/green-code-initiative/ecocode</url>
+        <tag>HEAD</tag>
+    </scm>
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/green-code-initiative/ecocode/issues</url>
+    </issueManagement>
+
+    <properties>
+
+        <java.version>11</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+
+        <encoding>UTF-8</encoding>
+        <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>${encoding}</project.reporting.outputEncoding>
+
+        <sonar.organization>green-code-initiative</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+
+        <sonarqube.version>9.4.0.54424</sonarqube.version>
+        <sonarjava.version>7.19.0.31550</sonarjava.version>
+
+        <sonar-analyzer-commons.version>2.5.0.1358</sonar-analyzer-commons.version>
+
+        <sonar-packaging.version>1.21.0.505</sonar-packaging.version>
+        <sonar.skipDependenciesPackaging>true</sonar.skipDependenciesPackaging>
+
+        <junit.jupiter.version>5.9.1</junit.jupiter.version>
+        <assertJ.version>3.23.1</assertJ.version>
+        <mockito.version>5.3.1</mockito.version>
+
+        <google.re2j>1.7</google.re2j>
+
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- MAIN sources dependencies -->
+            <dependency>
+                <groupId>org.sonarsource.sonarqube</groupId>
+                <artifactId>sonar-plugin-api</artifactId>
+                <version>${sonarqube.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.sonarsource.analyzer-commons</groupId>
+                <artifactId>sonar-analyzer-commons</artifactId>
+                <version>${sonar-analyzer-commons.version}</version>
+            </dependency>
+
+            <!-- for security on regex patterns : https://github.com/google/re2j -->
+            <dependency>
+                <groupId>com.google.re2j</groupId>
+                <artifactId>re2j</artifactId>
+                <version>${google.re2j}</version>
+            </dependency>
+
+            <!-- JAVA -->
+            <dependency>
+                <groupId>org.sonarsource.java</groupId>
+                <artifactId>sonar-java-plugin</artifactId>
+                <version>${sonarjava.version}</version>
+                <type>sonar-plugin</type>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- TEST sources dependencies -->
+            <dependency>
+                <groupId>org.sonarsource.java</groupId>
+                <artifactId>java-checks-testkit</artifactId>
+                <version>${sonarjava.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>${junit.jupiter.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>${assertJ.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-junit-jupiter</artifactId>
+                <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.11.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>3.6.0</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
+                    <artifactId>sonar-packaging-maven-plugin</artifactId>
+                    <version>${sonar-packaging.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-shade-plugin</artifactId>
+                    <version>3.5.0</version>
+                    <!-- common configuration for shade plugin -->
+                    <executions>
+                        <execution>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>shade</goal>
+                            </goals>
+                            <configuration>
+                                <filters>
+                                    <filter>
+                                        <artifact>commons-*:*</artifact>
+                                        <excludes>
+                                            <exclude>META-INF/**</exclude>
+                                        </excludes>
+                                    </filter>
+                                    <filter>
+                                        <artifact>org.*:*</artifact>
+                                        <excludes>
+                                            <exclude>META-INF/**</exclude>
+                                            <exclude>org/sonar/api/batch/sensor/**</exclude>
+                                            <exclude>javax/annotation/**</exclude>
+                                        </excludes>
+                                    </filter>
+                                    <filter>
+                                        <artifact>com.*:*</artifact>
+                                        <excludes>
+                                            <exclude>META-INF/**</exclude>
+                                        </excludes>
+                                    </filter>
+                                    <filter>
+                                        <artifact>junit:*</artifact>
+                                        <excludes>
+                                            <exclude>META-INF/**</exclude>
+                                        </excludes>
+                                    </filter>
+                                </filters>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.1.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>0.8.10</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>maven-central-publishing</id>
+            <!--
+                For publishing in Maven Central.
+                For more information:
+                - https://central.sonatype.org/publish/publish-guide/#deployment
+                - https://central.sonatype.org/publish/release/#login-into-ossrh
+            -->
+
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>ossrh</id>
+                    <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+                </snapshotRepository>
+            </distributionManagement>
+            <build>
+                <plugins>
+                    <plugin><!--
+
+                        For publishing in Maven Central,
+                        see: https://central.sonatype.org/publish/publish-maven/#distribution-management-and-authentication
+
+                        -->
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.13</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                    <plugin><!--
+                            For publishing in Maven Central, GPG key must be published to one of following servers:
+                            - keyserver.ubuntu.com
+                            - keys.openpgp.org
+                            - pgp.mit.edu
+
+                            For more informatino: https://central.sonatype.org/publish/requirements/gpg/#distributing-your-public-key
+                        -->
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>3.1.0</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <configuration>
+                                    <gpgArguments>
+                                        <arg>--pinentry-mode</arg>
+                                        <arg>loopback</arg>
+                                    </gpgArguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>
